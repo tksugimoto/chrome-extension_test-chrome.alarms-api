@@ -32,3 +32,19 @@ chrome.alarms.onAlarm.addListener(alarm => {
 });
 
 console.log("拡張起動");
+
+const showAlarms = () => {
+	chrome.alarms.getAll(alarms => {
+		const formattedAlarms = alarms.map(alarm => {
+			const name = alarm.name;
+			// scheduledTime: 繰り返しの場合でも初回設定時刻ではなく毎回更新される
+			const scheduledTime = new Date(alarm.scheduledTime).toLocaleString();
+			const periodInMinutes = alarm.periodInMinutes;
+			return {name, scheduledTime, periodInMinutes};
+		});
+		console.table(formattedAlarms);
+	});
+};
+
+console.info("showAlarms();")
+showAlarms();
