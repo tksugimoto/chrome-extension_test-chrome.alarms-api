@@ -1,3 +1,5 @@
+console.info("chrome.alarms.clearAll()");
+chrome.alarms.clearAll();
 
 chrome.alarms.create("test0", {
 	// 過去指定の場合、実行は保証されない（実行されることもある）
