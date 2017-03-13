@@ -1,21 +1,11 @@
 console.info("chrome.alarms.clearAll()");
 chrome.alarms.clearAll();
 
-chrome.alarms.create("test0", {
-	// 過去指定の場合、実行は保証されない（実行されることもある）
-	when: Date.now() - 100
-});
-chrome.alarms.create("test1", {
-	// 現在時刻指定の場合、設定直後の実行は保証されない（実行されることもある）
-	// 設定直後に実行されなくても繰り返しは実行される
-	when: Date.now(),
-	periodInMinutes: 1.5
-});
-chrome.alarms.create("test2", {
-	when: Date.now() + 1 * 1000
-});
-chrome.alarms.create("test3", {
-	when: Date.now() + 10 * 1000
+chrome.alarms.create("each-hour:34:56", {
+	// 毎時34分56秒
+	// 過去を指定しても繰り返し間隔を考慮して適切なタイミングを自動計算してくれる
+	when: new Date("2017/01/01 12:34:56").getTime(),
+	periodInMinutes: 60
 });
 
 chrome.alarms.onAlarm.addListener(alarm => {
