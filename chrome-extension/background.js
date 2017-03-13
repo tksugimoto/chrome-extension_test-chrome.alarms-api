@@ -1,17 +1,19 @@
 
 chrome.alarms.create("test0", {
-	// 1分未満のアラームの実行は保障されない
-	delayInMinutes: 0
+	// 過去指定の場合、実行は保証されない（実行されることもある）
+	when: Date.now() - 100
 });
 chrome.alarms.create("test1", {
-	delayInMinutes: 1,
-	periodInMinutes: 1
+	// 現在時刻指定の場合、設定直後の実行は保証されない（実行されることもある）
+	// 設定直後に実行されなくても繰り返しは実行される
+	when: Date.now(),
+	periodInMinutes: 1.5
 });
 chrome.alarms.create("test2", {
-	// 小数指定可
-	delayInMinutes: 1.2
-	// 繰り返し間隔（小数可）
-	periodInMinutes: 1.5
+	when: Date.now() + 1 * 1000
+});
+chrome.alarms.create("test3", {
+	when: Date.now() + 10 * 1000
 });
 
 chrome.alarms.onAlarm.addListener(alarm => {
