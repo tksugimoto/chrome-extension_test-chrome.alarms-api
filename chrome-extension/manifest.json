@@ -1,5 +1,5 @@
 {
-	"name": "chrome.alerms API確認",
+	"name": "chrome.alarms API確認",
 	"version": "0.1.0",
 	"manifest_version": 2,
 	"permissions": [
